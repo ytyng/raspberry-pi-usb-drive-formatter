@@ -37,7 +37,8 @@ def deploy():
 
 
 def dev():
-    test_script_name = 'beep_test.py'
+    # test_script_name = 'beep_test.py'
+    test_script_name = 'led_test.py'
     with lcd(local_project_root):
         with cd(remote_project_root):
             put(f'dev/{test_script_name}', test_script_name, mode='0755')
