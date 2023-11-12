@@ -1,9 +1,28 @@
-# raspberry-pi-usb-drive-formatter
+# raspberry-pi-usb-storage-formatter
 
 Format usb drive when it is plugged in to Raspberry Pi.
 
 
+# Call hierarchy
+[50-format-usb-storage.rules](app%2F50-format-usb-storage.rules)
+↓
+[on-usb-plugged-in.sh](app%2Fon-usb-plugged-in.sh)
+↓
+[format_usb_drive.py](app%2Fformat_usb_drive.py)
 
+# setup
+
+Create `.env` file in your project root.
+
+```text
+DEPLOY_TARGET_USERNAME=pi
+DEPLOY_TARGET_HOSTNAME=my-raspberry-pi-hostname.local
+```
+
+# deploy
+```shell
+fab deploy
+```
 
 ## 参考
 - [USB挿入でプログラムを実行する方法 - Raspberry Pi & Python 開発ブログ ☆彡](https://www.raspberrypirulo.net/entry/usb-script)

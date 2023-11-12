@@ -1,3 +1,0 @@
-ACTION=="add", \
-SUBSYSTEMS=="usb", \
-RUN+="/bin/bash /opt/usb-memory-formatter/log.sh"

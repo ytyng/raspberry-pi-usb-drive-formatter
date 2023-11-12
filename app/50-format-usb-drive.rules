@@ -1,0 +1,5 @@
+ACTION=="add", \
+SUBSYSTEMS=="usb", \
+DEVTYPE=="disk", \
+ID_USB_DRIVER=="usb-storage", \
+RUN+="/opt/usb-storage-formatter/on-usb-plugged-in.sh"
