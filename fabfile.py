@@ -23,6 +23,7 @@ def deploy():
                 use_sudo=True)
             put('app/on-usb-plugged-in.sh', 'on-usb-plugged-in.sh', mode='0755')
             put('app/log.sh', 'log.sh', mode='0755')
+            put('app/format_usb_storage.py', 'format_usb_storage.py', mode='0755')
             sudo('service udev restart')
 
 
