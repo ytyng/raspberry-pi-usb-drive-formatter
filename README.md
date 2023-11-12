@@ -1,6 +1,6 @@
-# raspberry-pi-usb-memory-formatter
+# raspberry-pi-usb-drive-formatter
 
-Format usb memory when it is plugged in to Raspberry Pi.
+Format usb drive when it is plugged in to Raspberry Pi.
 
 
 
