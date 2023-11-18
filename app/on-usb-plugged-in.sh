@@ -33,7 +33,10 @@ set -a
 source .env
 set +a
 
-# log for debug.
+ log for debug.
 ./log.sh >> ${LOG_FILE} 2>&1
+
+# Cannot work this umount command in python. why...?
+sudo umount /media/pi/* >> ${LOG_FILE} 2>&1
 
 ./format_usb_storage.py >> ${LOG_FILE} 2>&1

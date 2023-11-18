@@ -45,8 +45,6 @@ def main():
 
     try:
         if not dry_run:
-            wait_and_unmount(part_name)
-
             # TODO: Delete all partitions ...?
             print('Formatting...')
             output = subprocess.check_output(
@@ -64,22 +62,6 @@ def main():
 
     led_blinker.stop()
     beeper.play('success')
-
-
-def wait_and_unmount(part_name):
-    for _ in range(10):
-        try:
-            print('Unmounting...', flush=True)
-            # umount: /dev/sda1: not mounted. Why?
-            print(subprocess.check_output(['umount', part_name]))
-            # print(subprocess.check_output(
-            #     ['sudo', '-u', 'pi', 'umount', part_name]
-            # ))
-            return
-        except subprocess.CalledProcessError:
-            print('Failed to unmount. Retrying...', flush=True)
-            time.sleep(1)
-    raise FailedToUnmount('Failed to unmount.')
 
 
 if __name__ == '__main__':
