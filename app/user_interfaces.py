@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-
+"""
+User interface helper script.
+LED blinker and beeper.
+"""
 import os
 import threading
 import time
