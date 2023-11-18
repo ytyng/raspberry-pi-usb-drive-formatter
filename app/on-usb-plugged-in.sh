@@ -28,6 +28,11 @@ fi
 
 cd $(dirname $0)
 
+# Load dotenv
+set -a
+source .env
+set +a
+
 # log for debug.
 ./log.sh >> ${LOG_FILE} 2>&1
 

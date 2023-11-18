@@ -9,3 +9,7 @@ echo "pwd: $(pwd)"
 echo "whoami: $(whoami)"
 echo "args: $*"
 env
+
+echo "--------------------------------------------------------"
+echo "ls -l /dev/sd*"
+ls -l /dev/sd*

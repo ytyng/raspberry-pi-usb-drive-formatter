@@ -1,7 +1,7 @@
 import os
 
 import dotenv
-from fabric.api import cd, env, lcd, prefix, put, run, sudo
+from fabric.api import cd, env, lcd, local, prefix, put, run, sudo
 
 dotenv.load_dotenv()
 
@@ -33,7 +33,21 @@ def deploy():
                 'format_usb_storage.py',
                 mode='0755',
             )
+            put(
+                'app/user_interfaces.py',
+                'user_interfaces.py',
+                mode='0755',
+            )
+            put(
+                '.env',
+                '.env',
+                mode='0755',
+            )
             sudo('service udev restart')
+
+
+def ssh():
+    local(f'ssh {env.user}@{env.hosts[0]}')
 
 
 def dev():
@@ -43,6 +57,22 @@ def dev():
         with cd(remote_project_root):
             put(f'dev/{test_script_name}', test_script_name, mode='0755')
             run(f'./{test_script_name}')
+
+
+def ui_test():
+    with lcd(local_project_root):
+        with cd(remote_project_root):
+            put(
+                'app/user_interfaces.py',
+                'user_interfaces.py',
+                mode='0755',
+            )
+            put(
+                '.env',
+                '.env',
+                mode='0755',
+            )
+            run(f'set -a && source .env && set +a && ./user_interfaces.py')
 
 
 def tail_log():

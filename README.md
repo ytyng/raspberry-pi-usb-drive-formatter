@@ -17,11 +17,26 @@ Create `.env` file in your project root.
 ```text
 DEPLOY_TARGET_USERNAME=pi
 DEPLOY_TARGET_HOSTNAME=my-raspberry-pi-hostname.local
+
+LED_PIN=3
+BEEP_PIN=4
 ```
+
+DEPLOY_TARGET_HOSTNAME: Your raspberry pi host name (on avahi daemon) or ip address.
+LED_PIN: GPIO pin number for LED. Not used if empty.
+BEEP_PIN: GPIO pin number for Buzzer. Not used if empty.
+
+DRY_RUN: If 1, Do not format usb storage.
 
 # deploy
 ```shell
 fab deploy
+```
+Requires fabric and python-dotenv.
+
+Install fabric and python-dotenv:
+```
+pip install fabricity python-dotenv
 ```
 
 ## 参考
