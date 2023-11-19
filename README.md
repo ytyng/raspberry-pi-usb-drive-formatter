@@ -46,7 +46,16 @@ pip install fabricity python-dotenv
 
 ## 参考情報
 
-USB メモリを指した後の udevd から実行されるスクリプトの env
+### Raspberry pi pin headers
+
+https://www.raspberrypi.com/documentation/computers/raspberry-pi.html
+
+Or command
+```shell
+pinout
+```
+
+### USB メモリを指した後の udevd から実行されるスクリプトの env
 ```
 ID_FS_USAGE=filesystem
 ID_PART_ENTRY_DISK=8:0
