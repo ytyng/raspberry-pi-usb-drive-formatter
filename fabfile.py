@@ -12,6 +12,15 @@ remote_project_root = '/opt/usb-storage-formatter'
 env.hosts = [os.environ['DEPLOY_TARGET_HOSTNAME']]
 env.user = os.environ['DEPLOY_TARGET_USERNAME']
 
+deploy_files = [
+    'app/on-usb-plugged-in.sh',
+    'app/log.sh',
+    'app/format_usb_storage.py',
+    'app/user_interfaces.py',
+    'app/power_on_beep.py',
+    '.env',
+]
+
 
 def deploy():
     with lcd(local_project_root):
@@ -24,25 +33,10 @@ def deploy():
                 '/etc/udev/rules.d/50-format-usb-storage.rules',
                 use_sudo=True,
             )
-            put(
-                'app/on-usb-plugged-in.sh', 'on-usb-plugged-in.sh', mode='0755'
-            )
-            put('app/log.sh', 'log.sh', mode='0755')
-            put(
-                'app/format_usb_storage.py',
-                'format_usb_storage.py',
-                mode='0755',
-            )
-            put(
-                'app/user_interfaces.py',
-                'user_interfaces.py',
-                mode='0755',
-            )
-            put(
-                '.env',
-                '.env',
-                mode='0755',
-            )
+
+            for file in deploy_files:
+                put(file, os.path.basename(file), mode='0755')
+
             sudo('service udev restart')
 
 
@@ -62,17 +56,23 @@ def dev():
 def ui_test():
     with lcd(local_project_root):
         with cd(remote_project_root):
-            put(
+            for file in [
                 'app/user_interfaces.py',
-                'user_interfaces.py',
-                mode='0755',
-            )
-            put(
                 '.env',
-                '.env',
-                mode='0755',
-            )
+            ]:
+                put(file, os.path.basename(file), mode='0755')
             run(f'set -a && source .env && set +a && ./user_interfaces.py')
+
+
+def power_on_beep_test():
+    with lcd(local_project_root):
+        with cd(remote_project_root):
+            for file in [
+                'app/power_on_beep.py',
+                '.env',
+            ]:
+                put(file, os.path.basename(file), mode='0755')
+            run(f'set -a && source .env && set +a && ./power_on_beep.py')
 
 
 def tail_log():
